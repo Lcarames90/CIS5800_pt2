@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+        <title>
+            {{title}} - 55 Lexington
+        </title>
+    {% else %}
+        Welcome to 55 Lexington
+    {% endif %}
+</head>
+<body>
+    <div>55 Lexington Property Management System<br> <a href = "/index">Home</a></div>
+    {% block content %} 
+    {% endblock %}
+</body>
+</html>
