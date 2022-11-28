@@ -5,6 +5,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
 
+
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -47,7 +48,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-    
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -61,3 +62,14 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author':user, 'body':'Maintenance Issue - Plumbing'},
+        {'author':user, 'body':'Maintenance Issue - Cat is cold'}
+    ]
+    return render_template('user.html', user = user, posts = posts)
+
