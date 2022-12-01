@@ -7,6 +7,9 @@ class EditProfileForm(FlaskForm):
     username = StringField('Username', validators = [DataRequired()])
     about_me = TextAreaField('About Me', validators=[Length(min=0,max=140)])
     submit = SubmitField('Submit')
+
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfileForm, self)
     
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
